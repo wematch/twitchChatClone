@@ -97,3 +97,10 @@
   );
   color: #fff;
 }
+/* CHAT MESSAGE */
+.chatmessage-container {
+  margin-bottom: 10px;
+}
+.chatmessage-user {
+  font-weight: bold;
+}
