@@ -34,7 +34,7 @@ class SignIn extends React.Component {
           onChange={(e) => this.updateUsername(e.target.value)}
         />
         <div className="signin-wrapper">
-          <button className={`signin-action ${this.state.username ? "active" : ""}`} onClick={this.handleSetUsername}>
+          <button className={`signin-action ${this.state.username ? "active" : ""}`} disabled={!this.state.username} onClick={this.handleSetUsername}>
             Enter chat room
           </button>
         </div>

@@ -29,8 +29,8 @@ export default function Chatbox() {
   };
 
   return (
-    <div>
-      <div>
+    <div className="chatbox-container">
+      <div className="chatbox-message-container">
         {messages &&
           messages.map((msg, index) => (
             <ChatMessage
@@ -42,14 +42,15 @@ export default function Chatbox() {
           ))}
       </div>
 
-      <form onSubmit={sendMessage}>
+      <form className="chatbox-form" onSubmit={sendMessage}>
         <input
           value={formValue}
-          onChange={(e) => setFormValue(e.target.value)}
           placeholder="Write your message"
+          className="chatbox-input"
+          onChange={(e) => setFormValue(e.target.value)}
         />
-        <button type="submit" disabled={!formValue}>
-          send
+        <button type="submit" disabled={!formValue} className={`chatbox-action ${formValue ? "active" : ""}`}>
+            <i className="fa fa-paper-plane"></i>
         </button>
       </form>
     </div>
