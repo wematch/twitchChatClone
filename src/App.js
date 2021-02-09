@@ -6,10 +6,8 @@ import Chatbox from './components/chatbox/Chatbox';
 import SignIn from './components/auth/SignIn';
 
 import { connect } from "react-redux";
-import { useSelector } from 'react-redux'
 
 function App() {
-  console.log(useSelector(state => state.username))
   return (
     <div className="container">
       <Router>

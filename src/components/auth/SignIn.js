@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { setUsername } from "../../redux/actions";
-import { getUsername } from "../../redux/selectors";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -18,7 +17,6 @@ class SignIn extends React.Component {
 
   handleSetUsername = () => {
     this.props.setUsername(this.state.username);
-    // this.setState({ username: "" });
 
     this.props.history.push(`/chatbox/${this.state.username}`)
   };
@@ -30,7 +28,7 @@ class SignIn extends React.Component {
           onChange={(e) => this.updateUsername(e.target.value)}
           value={this.state.username}
         />
-        <button className="add-username" onClick={this.handleSetUsername}>
+        <button onClick={this.handleSetUsername}>
           Set username
         </button>
       </div>
