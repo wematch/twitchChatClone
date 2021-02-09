@@ -7,7 +7,7 @@ class SignIn extends React.Component {
     super(props);
 
     this.state = {
-      username: ''
+      username: "",
     };
   }
 
@@ -16,27 +16,31 @@ class SignIn extends React.Component {
   };
 
   handleSetUsername = () => {
-    this.props.setUsername(this.state.username);
-
-    this.props.history.push(`/chatbox/${this.state.username}`)
+    if (this.state.username) {
+      this.props.setUsername(this.state.username);
+  
+      this.props.history.push(`/chatbox/${this.state.username}`);
+    }
   };
 
   render() {
     return (
-      <div>
+      <div className="signin-container">
         <input
-          onChange={(e) => this.updateUsername(e.target.value)}
+          type="text"
           value={this.state.username}
+          placeholder="Username..."
+          className="signin-input"
+          onChange={(e) => this.updateUsername(e.target.value)}
         />
-        <button onClick={this.handleSetUsername}>
-          Set username
-        </button>
+        <div className="signin-wrapper">
+          <button className={`signin-action ${this.state.username ? "active" : ""}`} onClick={this.handleSetUsername}>
+            Enter chat room
+          </button>
+        </div>
       </div>
     );
   }
 }
 
-export default connect(
-    null,
-    { setUsername }
-  )(SignIn);
+export default connect(null, { setUsername })(SignIn);

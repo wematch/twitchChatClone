@@ -1,38 +1,51 @@
-.App {
+/* SIGN IN */
+.signin-container {
+  background-color: #ffffff;
+  width: 350px;
+  margin: 40px auto;
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px 2px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+}
+.signin-input {
+  width: 100%;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  border: none;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.signin-wrapper {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.signin-action {
+  border: none;
+  padding: 10px 20px;
+  color: #d3d3d3;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  border-radius: 20px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.signin-action:focus {
+  outline: none;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.signin-action.active {
+  cursor: pointer;
+  background-image: linear-gradient(
+    to right,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+  color: #fff;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.signin-action.active:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
 }
