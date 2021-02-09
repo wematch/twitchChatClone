@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Chatbox from './components/chatbox/Chatbox';
-import SignIn from './components/auth/SignIn'
+import SignIn from './components/auth/SignIn';
+
+import { connect } from "react-redux";
+import { useSelector } from 'react-redux'
 
 function App() {
+  console.log(useSelector(state => state.username))
   return (
     <div className="container">
       <Router>
         <Route path="/" exact component={SignIn} />
-        <Route path="/:username" exact component={Chatbox} />
+        <Route path="/chatbox/:username" exact component={Chatbox} />
       </Router>
     </div>
   );
 }
 
-export default App;
+export default connect()(App);

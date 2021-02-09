@@ -1,37 +1,44 @@
 import React from "react";
+import { connect } from "react-redux";
+import { setUsername } from "../../redux/actions";
+import { getUsername } from "../../redux/selectors";
 
-export default class SignIn extends React.Component {
-
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: '',
+      username: ''
     };
   }
 
-  handleChange = (e) => {
-    this.setState({ username: e.target.value });
+  updateUsername = (username) => {
+    this.setState({ username });
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSetUsername = () => {
+    this.props.setUsername(this.state.username);
+    // this.setState({ username: "" });
 
-    console.log('submit');
+    this.props.history.push(`/chatbox/${this.state.username}`)
   };
 
   render() {
     return (
-      <form className="signin-container" onSubmit={(e) => this.handleSubmit(e)}>
+      <div>
         <input
-          type="text"
-          placeholder="Choose username"
-          ref={(input) => (this.username = input)}
+          onChange={(e) => this.updateUsername(e.target.value)}
           value={this.state.username}
-          onChange={(e) => this.handleChange(e)}
         />
-        <button type="submit">Sign In</button>
-      </form>
+        <button className="add-username" onClick={this.handleSetUsername}>
+          Set username
+        </button>
+      </div>
     );
   }
 }
+
+export default connect(
+    null,
+    { setUsername }
+  )(SignIn);
