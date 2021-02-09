@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import firebase from "firebase/app";
 import { firestore } from "../../firebase/Firebase";
@@ -8,6 +8,7 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import ChatMessage from "./ChatMessage";
 
 export default function Chatbox() {
+
   const username = useSelector((state) => state.username);
 
   const messagesRef = firestore.collection("messages");
@@ -15,6 +16,12 @@ export default function Chatbox() {
 
   const [messages] = useCollectionData(query, { idField: "id" });
   const [formValue, setFormValue] = useState("");
+
+  const divRef = useRef(null);
+
+  useEffect(() => {
+    divRef.current.scrollIntoView({ behavior: 'smooth' });
+  });
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -40,6 +47,7 @@ export default function Chatbox() {
               createdAt={msg.createdAt}
             />
           ))}
+        <div ref={divRef} />
       </div>
 
       <form className="chatbox-form" onSubmit={sendMessage}>
@@ -49,8 +57,12 @@ export default function Chatbox() {
           className="chatbox-input"
           onChange={(e) => setFormValue(e.target.value)}
         />
-        <button type="submit" disabled={!formValue} className={`chatbox-action ${formValue ? "active" : ""}`}>
-            <i className="fa fa-paper-plane"></i>
+        <button
+          type="submit"
+          disabled={!formValue}
+          className={`chatbox-action ${formValue ? "active" : ""}`}
+        >
+          <i className="fa fa-paper-plane"></i>
         </button>
       </form>
     </div>
