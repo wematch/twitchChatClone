@@ -7,7 +7,10 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case SET_USERNAME: 
-      return action.payload.username;
+      return {
+        username: action.payload.username,
+        userColor: action.payload.userColor
+      };
     default:
       return state;
   }

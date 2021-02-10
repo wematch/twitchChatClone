@@ -8,17 +8,23 @@ class SignIn extends React.Component {
 
     this.state = {
       username: "",
+      userColor: "#000",
     };
   }
 
   updateUsername = (username) => {
-    this.setState({ username });
+    const randomColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+
+    this.setState({
+      username: username,
+      userColor: randomColor,
+    });
   };
 
   handleSetUsername = () => {
     if (this.state.username) {
-      this.props.setUsername(this.state.username);
-  
+      this.props.setUsername(this.state);
+
       this.props.history.push(`/chatbox/${this.state.username}`);
     }
   };
@@ -34,7 +40,11 @@ class SignIn extends React.Component {
           onChange={(e) => this.updateUsername(e.target.value)}
         />
         <div className="signin-wrapper">
-          <button className={`signin-action ${this.state.username ? "active" : ""}`} disabled={!this.state.username} onClick={this.handleSetUsername}>
+          <button
+            className={`signin-action ${this.state.username ? "active" : ""}`}
+            disabled={!this.state.username}
+            onClick={this.handleSetUsername}
+          >
             Enter chat room
           </button>
         </div>

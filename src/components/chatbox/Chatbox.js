@@ -9,12 +9,12 @@ import ChatMessage from "./ChatMessage";
 
 export default function Chatbox() {
 
-  const username = useSelector((state) => state.username);
+  const user = useSelector((state) => state);
 
   const messagesRef = firestore.collection("messages");
-  const query = messagesRef.orderBy("createdAt", "asc").limitToLast(25);
+  const query = messagesRef.orderBy("createdAt", "asc");
+  const [messages] = useCollectionData(query);
 
-  const [messages] = useCollectionData(query, { idField: "id" });
   const [formValue, setFormValue] = useState("");
 
   const divRef = useRef(null);
@@ -27,7 +27,8 @@ export default function Chatbox() {
     e.preventDefault();
 
     await messagesRef.add({
-      user: username,
+      user: user.username.username,
+      userColor: user.username.userColor,
       message: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
@@ -44,6 +45,7 @@ export default function Chatbox() {
               key={index}
               user={msg.user}
               message={msg.message}
+              userColor={msg.userColor}
               createdAt={msg.createdAt}
             />
           ))}
